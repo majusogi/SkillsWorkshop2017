@@ -17,18 +17,25 @@ def checkIfPal(num):
     #using ternary operator for condensed code
     return True if (str1==str2) else False
 
+#initially tried to decrement down the range 1000->100 in two nested loops,
+# but this meant I didn't find the biggest palindrome.
+
+#now just blindly check all products to see if they're bigger
+
 #put this code in a loop so I could return when the loop was complete
 def mainCheckLoop():
+    bestPal = 0
     for x in range(1000,100,-1):
         #only have to go up to the size of x for the second number
         for y in range(1000,100,-1):
 
             prod = x*y
             if checkIfPal(prod) == True:
-                print(prod,'=',x,'*',y)
-                return prod
+                if prod > bestPal:
+                    print(prod, '=', x, '*', y)
+                    bestPal = prod
 
-
+    return bestPal
 
 
 ans = mainCheckLoop()
