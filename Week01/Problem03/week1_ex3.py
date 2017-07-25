@@ -41,9 +41,9 @@ while isPrimeFlag==0:
 
     if prime_factor==1:
         isPrimeFlag = 1
-        print "done:",rem
+        print("done:",rem)
     else:
-        print "remainder is ",rem,"*",prime_factor
+        print("remainder is ",rem,"*",prime_factor)
         rem = rem/prime_factor
 
 

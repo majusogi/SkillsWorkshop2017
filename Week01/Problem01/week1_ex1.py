@@ -20,4 +20,4 @@ for i in range(num_max):
 # for i in range(int(math.floor(1000/5))):
 #     sum_var += i*5
 
-print sum_var
+print(sum_var)

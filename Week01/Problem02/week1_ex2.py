@@ -20,7 +20,7 @@ sum_fib = 0
 
 while fib <= max_num:
 
-    print fib,"+",old_fib,"=",fib+old_fib
+    print(fib,"+",old_fib,"=",fib+old_fib)
 
     if math.fmod(fib,2)==0:
         sum_fib += fib
@@ -30,4 +30,4 @@ while fib <= max_num:
     old_fib = fib
     fib = new_fib
 
-print sum_fib
+print(sum_fib)
