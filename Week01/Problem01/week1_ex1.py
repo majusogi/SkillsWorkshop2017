@@ -8,9 +8,9 @@ sum_var = 0
 num_max = 1000
 
 for i in range(num_max):
-    if math.fmod(i,3)==0:
+    if (i % 3 == 0):
         sum_var +=i
-    elif math.fmod(i,5)==0:
+    elif (i % 5 == 0):
         sum_var +=i
 
 

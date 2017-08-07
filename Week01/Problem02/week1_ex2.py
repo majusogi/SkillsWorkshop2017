@@ -20,9 +20,16 @@ sum_fib = 0
 
 while fib <= max_num:
 
-    print(fib,"+",old_fib,"=",fib+old_fib)
+    #print(fib,"+",old_fib,"=",fib+old_fib)
 
-    if math.fmod(fib,2)==0:
+    #C-style formatting
+    print("C: %i + %i = %i" % (fib,old_fib,fib+old_fib),end="")
+
+    #new python formatting
+    print("  Py: {:d} + {:d} = {:d}".format(fib,old_fib,fib+old_fib))
+
+
+    if (fib % 2 ==0):
         sum_fib += fib
         #print sum_fib
 
