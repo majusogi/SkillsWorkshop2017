@@ -14,7 +14,7 @@ def isPrime(num2check):
             return i
         else:
             i+=1
-            print(i)
+            #print(i)
     #if we got here without returning then it's prime
     return 1
 #enddef
@@ -61,8 +61,8 @@ def main(prod):
 #appended this to stop this script executing when 05 imports it!
 if __name__ == "__main__":
     print("wasn't imported")
-    #main(600851475143)
-    main(100)
+    main(600851475143)
+    #main(100)
 else:
     print("thanks for reusing code!")
 
