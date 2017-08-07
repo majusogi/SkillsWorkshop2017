@@ -32,7 +32,7 @@ def mainCheckLoop():
             prod = x*y
             if checkIfPal(prod) == True:
                 if prod > bestPal:
-                    print(prod, '=', x, '*', y)
+                    print("{:d} = {:d} * {:d}".format(prod, x, y))
                     bestPal = prod
 
     return bestPal

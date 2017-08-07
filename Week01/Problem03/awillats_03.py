@@ -20,7 +20,7 @@ def isPrime(num2check):
     while (i < math.sqrt(num2check)):
         # for free whatever comes out of this has to be prime, since we search starting from 2.
         # Non prime-factors have to be larger than their prime factors!
-        if math.fmod(num2check,i)==0:
+        if (num2check % i ==0):
             return i
         else:
             i+=1
@@ -41,9 +41,9 @@ while isPrimeFlag==0:
 
     if prime_factor==1:
         isPrimeFlag = 1
-        print("done:",rem)
+        print("done: {:1.0f}".format(rem))
     else:
-        print("remainder is ",rem,"*",prime_factor)
+        print("remainder is {:1.0f} * {:1.0f}".format(rem,prime_factor))
         rem = rem/prime_factor
 
 
