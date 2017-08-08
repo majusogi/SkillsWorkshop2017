@@ -108,6 +108,15 @@ print(matrix_w)
 pY = X_std.dot(matrix_w)
 
 
+#un-comment this section to verify that the "manual" approach works
+from sklearn.decomposition import PCA as sklearnPCA
+sklearn_pca = sklearnPCA(n_components=2)
+pY = sklearn_pca.fit_transform(X_std)
+print(sklearn_pca.explained_variance_ratio_)
+
+# print(np.shape(pY))
+# print(np.shape(y))
+# print(y)
 
 if num_ev==2:
     for ci,labl in enumerate(colors.keys()):
