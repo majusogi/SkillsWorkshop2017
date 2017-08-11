@@ -7,67 +7,74 @@ This week, we will delve into parallel computing.  To do so, we will focus
  C, C++, and Fortan. Learn more at http://www.openmp.org/.
 
 For the hands-on session, we have provided several assignments in C++ found in
-GT-IDEaS/SkillsWorkshop2017/
+GT-IDEaS/SkillsWorkshop2017/Week05/assignments/.  We attempt to decouple the
+ difficulty of learning C++ and OpenMP simultaneously by providing nearly
+ completed codes and only requiring simple tasks involving OpenMP.  These
+ assignments are tailored to touch upon some fundamental concepts and difficulties
+ that OpenMP programmers deal with.  These topics are generally summarized as:
 
+1.  Assignment 1 - Hello World
+2.  Assignment 2 - Speedups
+3.  Assignment 3 - Workloads and Scheduling
+4.  Assignment 4 - Resource Sharing
 
-You can learn more here:
-
-
-
-This week, we will explore databases in Python using the Pandas software
-package.  To install Pandas using `conda`, simply execute the following from
-the command line:
-
-```
-~$ conda install pandas
-```
-
-Then, `conda` will determine your version of Python, and install the
-appropriate version of Pandas (probably 0.20.1) and you'll be ready to go! Of
-course, if you installed Python through a download of the full Anaconda suite,
-you should already have Pandas installed.  To get started using Pandas, simply
-import it like this:
+Before we begin, some initial setup is required.  We need to ensure everyone
+ has a c++ compiler.  Since compatability between Mac OS and OpenMP is non-trivial,
+ we have designed the following work-around. First, execute the following from the 
+ command line:
 
 ```
->>> import pandas as pd
+conda create -n ideas gcc-5-mp -c psi4
 ```
 
-Here, `pd` is a convenient abbreviation for `pandas`, so any time you want to
-access some Pandas functionality, all you need to type is `pd.function_name()`
-instead of `pandas.function_name()`.  
+This will create a python envoriment using conda, which you installed in Week 1.
+  Importantly, this environment contains a gnu g++ compiler. To activate the environment,
+ execute the following:
 
-For our project this week, we will use Pandas to process ecological data
-according to the [Data Carpentry](http://www.datacarpentry.org) lesson,
-["Python for Ecologists"](http://www.datacarpentry.org/python-ecology-lesson/).
-During our interactive session this week, I will be introducing both the Pandas
-software and Jupyter notebooks, which are a mutli-language IDE, and will
-attempt to cover material from the first three sections from this lesson:
+```
+source activate ideas
+```
 
-1. [Starting with
-Data](http://www.datacarpentry.org/python-ecology-lesson/01-starting-with-data/)
+Now, everyone should have access to the g++ compiler.  Go into the the `makefile` and
+ edit the `COMPILER` option accordingly.  You should have:
 
-2. [Indexing, Slicing, and Subsetting DataFrames in
-Python](http://www.datacarpentry.org/python-ecology-lesson/02-index-slice-subset/)
+```
+COMPILER=g++
+```
 
-3. [Data Types and
-Formats](http://www.datacarpentry.org/python-ecology-lesson/03-data-types-and-format/)
+If you already had access to Intel compilers and want to you `icpc`, feel free.  The three
+ options in `makefile` shuld be completed as:
 
-Your project will be to complete the remaining three sections from this lesson,
-as well as completing **one** challenge problem per section: 
+```
+COMPILER=g++      
+VERSION=-std=gnu++11
+OPENMP=-fopenmp   
+```
+OR
+```
+COMPILER=icpc     
+VERSION=-std=c++11
+OPENMP=-qopenmp   
+```
 
-4. [Combining DataFrames with
-Pandas](http://www.datacarpentry.org/python-ecology-lesson/04-merging-data/) 
+Now that the makefile is configured correclty, you can execute the following on the command line:
 
-5.  [Data Workflows and
-Automation](http://www.datacarpentry.org/python-ecology-lesson/05-loops-and-functions/)
+`make a1`
 
-6. [Data Ingest & Visualization - Matplotlib &
-Pandas](http://www.datacarpentry.org/python-ecology-lesson/07-putting-it-all-together/)
+Doing so compiles the `assignment1.cc` file.  To run the executable, execute:
 
-Finally, commit your code for each of the lessons to your fork of the
-GT-IDEaS/SkillsWorkshop2017 repository, and create a pull request upstream.
-Each of these lessons should be completed inside a Jupyter notebook, with file
-name `firstinitiallastname_0x.ipynb`, where x is between 1 and 6 and
-corresponds to the lesson number above, e.g., `dsirianni_04.ipynb`.  
+`./a1`
+
+The same process is done for all other assignments.
+Now, we will discuss each assignment and how to complete it.  
+
+
+1.  Assignment 1 in an introductory program containing "Hello World" for OpenMP.  The program is already
+ completed.  Compile and run the executable.  Notice the outputs.  Is there a particular order?  Try to
+ change `assignment1.cc` so that only one master thread prints to the console.
+
+ 
+
+
 
 
