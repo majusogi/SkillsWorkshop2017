@@ -1,4 +1,4 @@
-// Assignment 1 - Basic for loop parallelization
+// Assignment 2 - Basic for loop parallelization
 // IDEaS Workshop Week 5: HPC
 
 #include <stdlib.h>
@@ -8,8 +8,8 @@
 #include <time.h>
 #include "timer.h"
 
-#define ITERATIONS 10000
-#define WORK_TIME 100
+#define ITERATIONS 10
+#define WORK_TIME 1000
 
 int main() 
 {
@@ -35,7 +35,8 @@ int main()
 
         double t1 = time_in_seconds();
         times[m] = t1 - t0;    
-        printf("Time with %d threads: %f, Speedup: %f\n", m, times[m], times[0]/times[m]);
+        printf("Time with %d threads: %f, Speedup: %f\n", m + 1, times[m], 
+            times[0]/times[m]);
     }
     
 }

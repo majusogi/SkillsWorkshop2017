@@ -1,4 +1,4 @@
-// Assignment 3 - Parallel tensor contraction
+// Assignment 4 - Resource sharing with prefix sum
 // IDEaS Workshop Week 5: HPC
 
 #include <stdlib.h>
@@ -7,59 +7,55 @@
 #include <unistd.h>
 #include <time.h>
 #include <vector>
-#include <string>
+#include <tuple>
+#include <math.h>
 #include "timer.h"
-//#include <lapacke.h>
 
-extern void dgemm_(char *transa, char *transb, int *m, int *n, int *k, double
-        *alpha, double *a, int *lda, double *b, int *ldb, double *beta, double *c,
-        int *ldc );
-void read_start_tensor(int *vec, size_t n, std::string filename);
-void check_answer(int *vec, int n);
+#define N 10000
 
 int main() 
 {
-    size_t Q = 50;
-    size_t p = 50;
-    size_t q = 50;
-    size_t l = 40;
-
-    // allocate tensor Qpq of size (50, 50, 50) 
-    std::vector<int> Qpq; 
-    Qpq.reserve(Q * p * q);
-    read_start_tensor(Qpq.data(), Q * p * q, "a4_start_tensor.dat");
-
-    // alocate matrix ql of size (50, 40);
-    std::vector<int> ql;
-    ql.reserve(q * l);
-    read_start_tensor(ql.data(), q * l, "a4_start_matrix.dat");
-
-    // allocate final tensor of size (50, 50, 40)
-    std::vector<int> Qpl;
-    Qpl.reserve(Q * p * l);
-    
     // setup ~
     int max_threads = omp_get_max_threads();
+    double times[max_threads];
     
-    // your code below., complete the contraction ~~
+    for(int m = 0; m < max_threads; m++){
+        
+        // init sum 
+        unsigned long long int sum = 0;
+        
+        int nthreads = m + 1;
+        double t0 = time_in_seconds();
 
+        // determine blocking
+        std::vector<std::pair<size_t, size_t>> blocks;
+        for(int i = 0, start = 1, size; i < nthreads; i++, start += size){
+            size = ((N % nthreads) / (i + 1) ? ceil((double)N / nthreads) : 
+                floor((double)N / nthreads)); 
+            blocks.push_back(std::make_pair(start, start + size));
+        }
+        
+        // ==> Improve strategy below! <== //    
+        
+        #pragma omp parallel num_threads(nthreads) 
+        {
+            // get block info
+            int id = omp_get_thread_num();
+            size_t start = std::get<0>(blocks[id]);
+            size_t stop  = std::get<1>(blocks[id]);
 
+            for(int i = start; i < stop; i++){
+                #pragma omp atomic
+                sum += i;
+            }
+   
+        }        
     
-    // your code above., complete the contraction ~~
-
-    
-
-
+        // ==> Improve strategy above! <== //    
+        
+        double t1 = time_in_seconds();
+        times[m] = t1 - t0;    
+        printf("(%d): Answer: %d, Time: %f, Speedup: %f\n", m, sum, times[m], 
+            times[0]/times[m]);
+    }
 }
-
-void read_start_tensor(int *vec, size_t n, std::string filename)
-{
-    FILE *fp = fopen(filename.c_str(), "r");
-    size_t s = fread(vec, sizeof(int), n, fp);
-    fclose(fp);
-}
-
-//void check_answer(int *vec, int n)
-//{
-//
-//}
