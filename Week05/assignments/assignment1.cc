@@ -12,7 +12,7 @@ int main()
     {
 
         int thread_id = omp_get_thread_num();
-        printf("Greetings! ~ from thread %d\n", thread_id); 
+        printf("Hello World! ~ from thread %d\n", thread_id); 
 
     }
 

@@ -1,8 +1,8 @@
 
 # Edit these according to your environment
-COMPILER=icpc      # or g++
-VERSION=-std=c++11 # or -std=gnu++11
-OPENMP=-qopenmp    # or -fopenmp
+COMPILER=g++       # icpc or g++
+VERSION=-std=c++11 # -std=c++11 or -std=gnu++11
+OPENMP=-fopenmp    # -qopenmp or -fopenmp
 
 a1: assignment1.cc timer.cc 
 	$(COMPILER) $(VERSION) $(OPENMP) assignment1.cc timer.cc -o a1

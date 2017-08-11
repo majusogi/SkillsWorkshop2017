@@ -4,11 +4,11 @@ Week 05: High Performance Computing
 This week, we will delve into parallel computing.  To do so, we will focus
  on the shared memory programming model using OpenMP (Open Multi-Processing).
   OpenMP is an API that supports shared memory multiprocessing programming in
- C, C++, and Fortan. Learn more at http://www.openmp.org/.
+ C, C++, and Fortran. Learn more at http://www.openmp.org/.
 
 For the hands-on session, we have provided several assignments in C++ found in
 GT-IDEaS/SkillsWorkshop2017/Week05/assignments/.  We attempt to decouple the
- difficulty of learning C++ and OpenMP simultaneously by providing nearly
+ difficulty of simultaneously learning C++ and OpenMP by providing nearly
  completed codes and only requiring simple tasks involving OpenMP.  These
  assignments are tailored to touch upon some fundamental concepts and difficulties
  that OpenMP programmers deal with.  These topics are generally summarized as:
@@ -27,8 +27,8 @@ Before we begin, some initial setup is required.  We need to ensure everyone
 conda create -n ideas gcc-5-mp -c psi4
 ```
 
-This will create a python envoriment using conda, which you installed in Week 1.
-  Importantly, this environment contains a gnu g++ compiler. To activate the environment,
+This will create a python envoriment using conda, which you should have installed in Week 1.
+  Importantly, this environment contains a GNU g++ compiler. To activate the environment,
  execute the following:
 
 ```
@@ -87,10 +87,8 @@ Now, we will discuss each assignment and how to complete it.
 4.  Assignment 4 contains a parallel prefix sum evaluator.  First, compile and run the program.  Evaluate the outputs.
   The speedups should get worse as more threads are used.  After you understand why this is, try edit the code and fix the issue.
   This may take a few lines of code.  After, recompile and run the program.  You should be able to acquire some good speedups.
-  Depending on your machine, you may have to crank up the `N` variable quite a bit.  After about 10,000 you will likely get
+  Depending on your machine, you may have to crank up the `N` variable quite a bit.  Unfortunately, after about 10,000 you will likely get
  an integer overflow.  Programming in C++ does not come with the luxury of unlimited precision, so we are limited to what can be 
  stored in an `unsigned long long int` type.  You will probably have to go well past this limit to start to see good speedups.
-  To prevent overflow, change the summation `sum == i` to either `sum += 1` or `sum += 0`.   
-
-
+  If necessary, prevent overflow by changing the summation `sum == i` to either `sum += 1` or `sum += 0`.   
 

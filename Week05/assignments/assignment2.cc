@@ -9,7 +9,7 @@
 #include "timer.h"
 
 #define ITERATIONS 10
-#define WORK_TIME 1000
+#define WORK_TIME 100
 
 int main() 
 {
@@ -35,7 +35,7 @@ int main()
 
         double t1 = time_in_seconds();
         times[m] = t1 - t0;    
-        printf("Time with %d threads: %f, Speedup: %f\n", m + 1, times[m], 
+        printf("(%d): Time: %f, Speedup: %f\n", m + 1, times[m], 
             times[0]/times[m]);
     }
     
