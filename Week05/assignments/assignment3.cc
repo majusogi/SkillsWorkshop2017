@@ -5,7 +5,6 @@
 #include <stdio.h>
 #include <omp.h>
 #include <unistd.h>
-#include <time.h>
 #include "timer.h"
 
 #define ITERATIONS 3000

@@ -5,13 +5,13 @@
 #include <stdio.h>
 #include <omp.h>
 #include <unistd.h>
-#include <time.h>
 #include <vector>
 #include <tuple>
 #include <math.h>
 #include "timer.h"
 
-#define N 10000
+// N > max_threads
+#define N 10000000
 
 int main() 
 {
@@ -27,6 +27,8 @@ int main()
         int nthreads = m + 1;
         double t0 = time_in_seconds();
 
+        // ==> Improve strategy below! <== //    
+        
         // determine blocking
         std::vector<std::pair<size_t, size_t>> blocks;
         for(int i = 0, start = 1, size; i < nthreads; i++, start += size){
@@ -34,8 +36,6 @@ int main()
                 floor((double)N / nthreads)); 
             blocks.push_back(std::make_pair(start, start + size));
         }
-        
-        // ==> Improve strategy below! <== //    
         
         #pragma omp parallel num_threads(nthreads) 
         {
@@ -46,7 +46,7 @@ int main()
 
             for(int i = start; i < stop; i++){
                 #pragma omp atomic
-                sum += i;
+                sum += 1;
             }
    
         }        
@@ -55,7 +55,7 @@ int main()
         
         double t1 = time_in_seconds();
         times[m] = t1 - t0;    
-        printf("(%d): Answer: %d, Time: %f, Speedup: %f\n", m, sum, times[m], 
+        printf("(%d): Answer: %llu, Time: %f, Speedup: %f\n", m, sum, times[m], 
             times[0]/times[m]);
     }
 }

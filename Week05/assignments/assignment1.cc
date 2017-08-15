@@ -7,7 +7,10 @@
 
 int main() 
 {
+    // OpenMP function 
     int nthreads = omp_get_max_threads();
+
+    // OpenMP pragma and clause
     #pragma omp parallel num_threads(nthreads)
     {
 

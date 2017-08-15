@@ -1,8 +1,8 @@
 Week 05: High Performance Computing
 ==================
 
-This week, we will delve into parallel computing.  To do so, we will focus
- on the shared memory programming model using OpenMP (Open Multi-Processing).
+This week, we delve into parallel computing.  In our project, we will investigate
+ the shared memory programming model using OpenMP (Open Multi-Processing).
   OpenMP is an API that supports shared memory multiprocessing programming in
  C, C++, and Fortran. Learn more at http://www.openmp.org/.
 
@@ -35,14 +35,14 @@ This will create a python envoriment using conda, which you should have installe
 source activate ideas
 ```
 
-Now, everyone should have access to the g++ compiler.  Go into the the `makefile` and
+Now, everyone should have access to the g++ compiler.  Within the `Week05` directory, go into the `makefile` and
  edit the `COMPILER` option accordingly.  You should have:
 
 ```
 COMPILER=g++
 ```
 
-If you already had access to Intel compilers and want to you `icpc`, feel free.  The three
+If you already had access to Intel compilers and want to use `icpc`, feel free.  The three
  options in `makefile` shuld be completed as:
 
 ```
@@ -66,29 +66,40 @@ Doing so compiles the `assignment1.cc` file.  To run the executable, execute:
 `./a1`
 
 The same process is done for all other assignments.
-Now, we will discuss each assignment and how to complete it.  
-
+Now, we will discuss each assignment and how to complete it.
+Assignment submission will be done entirely through Github.  Create a file, `writeup.pdf`, which will contain
+all necessary workup.  Each assignmnet shoudl correspond to a section in your writeup.  
+To complete the project, you will push your `writeup.pdf` file and all code alterations. 
 
 1.  Assignment 1 is an introductory program containing "Hello World" for OpenMP.  The program is already
- completed.  Compile and run the executable.  Notice the outputs.  Is there a particular order?  Try to
- change `assignment1.cc` so that only one master thread prints to the console.
+ completed.  Compile and run the executable.  Notice the outputs.  Is there a particular order in which threads print?  
+ Try to change `assignment1.cc` so that only one master thread prints to the console.
+Challenge: Use the `omp barrier` pragma to have each thread print in order, from lowest thread number to highest.
+ Comment on your strategy in your writeup.
 
-2.  Assignment 2 contains a basic for loop which can be parallelized.  First, compile and execute the program.
-  Notice the outputs.  Now, edit `assignment2.cc` so the loop is parallelized.  This should only require one
+2.  Assignment 2 contains a basic loop which can be parallelized.  First, compile and execute the program.
+  Notice the outputs.  Now, insert a pragma in `assignment2.cc` to parallelize the loop.  This should only require one
  line of code.  Recompile and run the program.  How well is the loop parallelized?  Now, tweak the `ITERATIONS`
- and `WORK_TIME` variables at the top of `assignment2.cc` and re-evaluate the performance.  
+ and `WORK_TIME` variables at the top of `assignment2.cc` and re-evaluate the performance.  You should be able to get 
+ very good speedups!  Include a speedup plot of this program in your writeup. 
 
-3.  Assignment 3 is nearly identical to Assignment 2, but the work of the for loop is severely non-uniform.
+3.  Assignment 3 is nearly identical to Assignment 2, but the work of the loop is severely non-uniform.
   First, go into `assignment3.cc` and try to understand how the work is changing for each iteration of the loop.
   After, parallelize the loop, compile, and run the program.  How does the output compare to what was found previously in Assignment 2?
   The resulting speedups should be worse!
   Add a `schedule()` clause to the loop and see if you can acquire better speedups.
+ Plot your speedups under some different scheduling assignments and include it in your writeup.  Comment on performance.
 
 4.  Assignment 4 contains a parallel prefix sum evaluator.  First, compile and run the program.  Evaluate the outputs.
-  The speedups should get worse as more threads are used.  After you understand why this is, try edit the code and fix the issue.
+  The speedups should get worse as more threads are used.  After you understand why this is, edit the code and fix the issue.
   This may take a few lines of code.  After, recompile and run the program.  You should be able to acquire some good speedups.
-  Depending on your machine, you may have to crank up the `N` variable quite a bit.  Unfortunately, after about 10,000 you will likely get
+  Depending on your machine, you may have to crank up the `N` variable quite a bit.  Unfortunately, after about 10,000, you will likely get
  an integer overflow.  Programming in C++ does not come with the luxury of unlimited precision, so we are limited to what can be 
  stored in an `unsigned long long int` type.  You will probably have to go well past this limit to start to see good speedups.
-  If necessary, prevent overflow by changing the summation `sum == i` to either `sum += 1` or `sum += 0`.   
+  If necessary, prevent overflow by changing the summation `sum == i` to either `sum += 1` or `sum += 0`.  Briefly discuss your
+ strategy in the writeup. 
+
+5.  Assignment 5 contains the skeleton for a code which collapses an N x N matrix to an N vector by summing on one dimension.  Using what
+ has been previously covered, implement the remaining code.  To check for correctness, the initial matrix contains all ones.  Discuss
+ briefly your strategy and push your solution.
 

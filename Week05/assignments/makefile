@@ -16,7 +16,10 @@ a3: assignment3.cc timer.cc
 a4: assignment4.cc timer.cc
 	$(COMPILER) $(VERSION) $(OPENMP) assignment4.cc timer.cc -o a4 
 
+a5: assignment5.cc timer.cc
+	$(COMPILER) $(VERSION) $(OPENMP) assignment5.cc timer.cc -o a5
+
 clean:
-	rm -f *.o a1 a2 a3 a4
+	rm -f *.o a1 a2 a3 a4 a5
 
 .PHONY: clean
